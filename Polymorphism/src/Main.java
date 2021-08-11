@@ -7,7 +7,7 @@ public class Main {
         }
     }
     public static Movie randomMovie(){
-        int randomNumber = (int)(Math.random()*5) +1;
+        int randomNumber = (int)(Math.random()*5) +1;//Math.random() returns a number between 0.0(included) to 1.0(excluded). 
         System.out.println("Random Number generated = "+ randomNumber);
         switch(randomNumber){
             case 1:
