@@ -11,7 +11,7 @@ public class MobilePhone {
     
     
     
-    private boolean addNewContact(Contact contact){
+    public boolean addNewContact(Contact contact){
         int chk= findContact(contact.getName());
         if(chk>=0){
             System.out.println("contact already exists");
@@ -24,13 +24,13 @@ public class MobilePhone {
         }
     }
     
-    private boolean updateContact(Contact oldContact, Contact newContact){
+    public boolean updateContact(Contact oldContact, Contact newContact){
         int k=findContact(oldContact);
         if(k>=0){
-            int chk= findContact(newContact.getName());
+            int chk= findContact(newContact);
             if(chk>=0){
                 removeContact(oldContact);
-                System.out.println("new contact already existed and the old contact is removed");
+                System.out.println("new contact already existed and the old contact is removed successfully");
                 return true;
             }
             this.myContacts.set(k,newContact);
@@ -43,7 +43,7 @@ public class MobilePhone {
         } 
     }
     
-    private boolean removeContact(Contact contact){
+    public boolean removeContact(Contact contact){
         int k=findContact(contact);
         if(k>=0){
             System.out.println(contact.getName() +" removed successfully");
@@ -51,7 +51,7 @@ public class MobilePhone {
             return true;
         }
         else{
-            System.out.println("Contact not found in the list");
+            System.out.println(contact.getName()+" not found in the list");
                 return false;
         }
     }
@@ -64,27 +64,36 @@ public class MobilePhone {
         for(int i=0;i<this.myContacts.size();i++){
             Contact contact=this.myContacts.get(i);
             if(contact.getName().equals(contactName)){
-                // System.out.println("Contact found");
                 return i;
             }
         }
-        // System.out.println("Contact not found");
         return -1;
     }
     
-    private Contact queryContact(String contactName){
-        int k= findContact(contactName);
+    public String queryContact(Contact contact){
+        int k= findContact(contact);
         if(k>=0){
-            System.out.println(contactName+ " contact found");
-            return myContacts.get(k);
+            return contact.getName();
         }
         return null;
     }
     
-    private void printContact(){
-        System.out.println("Printing the existing contact:-");
-        for(int i=0;i<this.myContacts.size();i++){
-            System.out.println(this.myContacts.get(i).getName() + " -> "+ this.myContacts.get(i).getPhoneNumber());
+    public Contact queryContact(String name){
+        int k= findContact(name);
+        if(k>=0){
+            return this.myContacts.get(k);
+        }
+        return null;
+    }
+    public void printContact(){
+        if(this.myContacts.size()==0){
+            System.out.println("No contacts found");
+        }
+        else{
+            System.out.println("Printing the existing contact:-");
+            for(int i=0;i<this.myContacts.size();i++){
+                System.out.println(i+1+". "+this.myContacts.get(i).getName() + " -> "+ this.myContacts.get(i).getPhoneNumber());
+            }
         }
     }    
 }
